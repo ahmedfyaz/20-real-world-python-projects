@@ -1,4 +1,4 @@
-from modules.functions import get_todos,show_todos,add_todos    
+from functions import get_todos,show_todos,add_todos    
 while True:
     user_input = input("Select Your Action 'add','edit','completed','show' 'exit' : ").lower().strip()
     if(user_input.startswith('add')):
