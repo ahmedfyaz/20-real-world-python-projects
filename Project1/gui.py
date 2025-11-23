@@ -4,10 +4,10 @@ label = sg.Text("Type in Todo")
 input_text = sg.InputText(tooltip="Enter Todo",key="todo")
 add_button = sg.Button("Add")
 list_box =sg.Listbox(values=functions.get_todos("todos.txt"),key="todos",enable_events=True,size=(45,10))
-nav_bar = sg.CloseButton("Exit")
 edit_button = sg.Button("Edit")
-del_button = sg.Button("Completed")
-window = sg.Window("My Todo-App",layout=[[label],[input_text,add_button],[list_box,edit_button]],font=('Helvetica',20))
+exit_button = sg.Button("Exit")
+complete_button = sg.Button("Completed")
+window = sg.Window("My Todo-App",layout=[[label],[input_text,add_button,exit_button],[list_box,edit_button,complete_button]],font=('Helvetica',20))
 
 while True:
     event,values = window.read()
@@ -27,6 +27,14 @@ while True:
             todos[index] = new_todo
             functions.add_todos("todos.txt",todos)
             window['todos'].update(values=todos)
+        case "Completed":
+            todo_to_remove = values["todos"][0]
+            todos = functions.get_todos("todos.txt")
+            index = todos.index(todo_to_remove)
+            todos.pop(index)
+            window['todos'].update(values=todos)
+        case "Exit":
+            break
         case sg.WIN_CLOSED:
             break
 window.close()
