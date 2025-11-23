@@ -29,16 +29,18 @@ chain = prompt | llm | StrOutputParser()
 
 
 history = []
-while True:
-    user_input = input("You : ")
-    if user_input=="exit":
-        break
-    history.append( {"role": "user", "content": user_input})
-    response = chain.invoke({"input":user_input,"history": history})
-    print(f"Albert : {response}")
-    history.append({"role":"assistant","content": response})
-    history.append(HumanMessage(content=user_input))
-    history.append(AIMessage(content=response))
+def chat(user_int,hist):
+    print(user_int)
+# while True:
+#     user_input = input("You : ")
+#     if user_input=="exit":
+#         break
+#     history.append( {"role": "user", "content": user_input})
+#     response = chain.invoke({"input":user_input,"history": history})
+#     print(f"Albert : {response}")
+#     history.append({"role":"assistant","content": response})
+#     history.append(HumanMessage(content=user_input))
+#     history.append(AIMessage(content=response))
 page = gr.Blocks(
     title="Chat with Einstein",
 )
@@ -52,7 +54,7 @@ with page:
     chatbot = gr.Chatbot()
 
     msg = gr.Textbox()
-
+    msg.submit(chat,[msg,chatbot],[])
     clear = gr.Button()
 
 page.launch(share=True)
