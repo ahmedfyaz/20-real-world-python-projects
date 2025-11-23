@@ -3,12 +3,11 @@ import FreeSimpleGUI as sg
 label = sg.Text("Type in Todo")
 input_text = sg.InputText(tooltip="Enter Todo",key="todo")
 add_button = sg.Button("Add")
+list_box =sg.Listbox(values=functions.get_todos("todos.txt"),key="todos",enable_events=True,size=(45,10))
+nav_bar = sg.CloseButton("Exit")
 edit_button = sg.Button("Edit")
 del_button = sg.Button("Completed")
-exit_button = sg.Button("Exit")
-show_button = sg.Button("Show")
-
-window = sg.Window("My Todo-App",layout=[[label],[input_text,add_button,edit_button,del_button,show_button,exit_button]],font=('Helvetica',20))
+window = sg.Window("My Todo-App",layout=[[label],[input_text,add_button],[list_box,edit_button]],font=('Helvetica',20))
 
 while True:
     event,values = window.read()
@@ -18,6 +17,16 @@ while True:
             new_todo = values['todo']+'\n'
             todos.append(new_todo)
             functions.add_todos("todos.txt",todos)
+            window['todos'].update(values=todos)
+        case "Edit":
+            todo_to_edit = values["todos"][0]
+            new_todo = values['todo']+"\n"
+
+            todos = functions.get_todos('todos.txt')
+            index = todos.index(todo_to_edit)
+            todos[index] = new_todo
+            functions.add_todos("todos.txt",todos)
+            window['todos'].update(values=todos)
         case sg.WIN_CLOSED:
             break
 window.close()
