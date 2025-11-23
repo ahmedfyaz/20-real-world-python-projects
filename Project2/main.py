@@ -20,7 +20,7 @@ system_prompt = """
     You should also have sense of humour.
 """
 user_input = input("")
-response = llm.invoke([{"role":"user","content":system_prompt+user_input}])
+response = llm.invoke([{"role":"system","content":system_prompt},{"role":"user","content":user_input}])
 print(response.content)
 # while True:
 #     user_input = input("You : ")
