@@ -15,3 +15,9 @@ analyzer = SentimentIntensityAnalyzer()
 
 ## running loop to find
 
+for nr,chapter in enumerate(chapters):
+    score = analyzer.polarity_scores(chapter)
+    if score['pos']>score['neg']:
+        print(nr,"Positive")
+    else:
+        print(nr,"Positive")
