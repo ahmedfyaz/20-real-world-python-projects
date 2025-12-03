@@ -28,7 +28,7 @@ while True:
         if cv2.contourArea(contour)<10000:
             continue
         x,y,w,h = cv2.boundingRect(contour)
-        cv2.rectangle(frame,(x,y),(x+w,y+h))
+        cv2.rectangle(frame,(x,y),(x+w,y+h))  ## wrap the object with a rectangle
     key = cv2.waitKey(1)
     if key == ord("q"):
         break
