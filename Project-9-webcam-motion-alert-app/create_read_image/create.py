@@ -15,4 +15,4 @@ a = numpy.array(
       [47,255,173],
       [255,255,255]]]
 )
-cv2.imwrite("image.png",a)
+cv2.imwrite("image.png", a)
