@@ -28,7 +28,8 @@ while True:
         if cv2.contourArea(contour)<10000:
             continue
         x,y,w,h = cv2.boundingRect(contour)
-        cv2.rectangle(frame,(x,y),(x+w,y+h))  ## wrap the object with a rectangle
+        cv2.rectangle(frame,(x,y),(x+w,y+h),(0,255,0),3)  ## wrap the object with a rectangle
+    cv2.imshow("Video",frame)
     key = cv2.waitKey(1)
     if key == ord("q"):
         break
