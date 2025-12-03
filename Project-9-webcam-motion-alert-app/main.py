@@ -8,10 +8,11 @@ time.sleep(1) ## it will negate the black color in the starting and help the cam
 
 while True:
     check,frame = video.read()
-    cv2.imshow("My Video",frame)
+    gray_frame = cv2.cvtColor(frame,cv2.COLOR_BGR2GRAY) #convert the frame color into grey because it is less heavy
+
+    cv2.imshow("My Video", gray_frame_gau)
 
     key = cv2.waitKey(1)
-
     if key == ord("q"):
         break
 video.release()
