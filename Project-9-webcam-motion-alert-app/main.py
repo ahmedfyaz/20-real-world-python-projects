@@ -14,6 +14,8 @@ count = 0
 while True:
     status = 0
     check,frame = video.read()
+    cv2.imwrite(f"image{count}.png",frame)
+    count = count +1
     gray_frame = cv2.cvtColor(frame,cv2.COLOR_BGR2GRAY) #convert the frame color into grey because it is less heavy
     gray_frame_gau = cv2.GaussianBlur(gray_frame, (21, 21),0)  # applying gaussian blur to make calculations more efficient
 
