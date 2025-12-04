@@ -6,12 +6,18 @@ import time
 import  cv2
 import  glob
 from emailing import send_email
-
+from threading import  Thread
 video = cv2.VideoCapture(0) # 0 of you are using your computer or laptop camera and 1 or 2 if external
 time.sleep(1) ## it will negate the black color in the starting and help the camera load
 first_frame = None
 status_list = []
 count = 0
+
+def clean_folder():
+    images = glob.glob("images/*.png")
+    for image in images:
+        os.remove(image)
+image_with_object = ""
 while True:
     status = 0
     check,frame = video.read()
@@ -48,7 +54,8 @@ while True:
     status_list = status_list[-2:]
 
     if status_list[0]==1  and  status_list[1]==0:
-        send_email()
+        send_email(image_with_object)
+        clean_folder()
     cv2.imshow("Video",frame)
     key = cv2.waitKey(1)
     if key == ord("q"):
