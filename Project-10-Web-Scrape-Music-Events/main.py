@@ -20,5 +20,5 @@ def extract(source):
 if  __name__ == "__main__":
     scraped = scrape(URL)
     extracted = extract(scraped)
-    save_text(extracted)
+    if extracted != "No Upcoming Tours"
     print(extracted)
