@@ -1,6 +1,7 @@
 import  requests
 import selectorlib
-
+from  emailing import send_email
+import  time
 HEADERS = {
     'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}
 URL  = "https://programmer100.pythonanywhere.com/tours/"
@@ -15,8 +16,7 @@ def extract(source):
     value = extractor.extract(source)["tours"]
     return value
 
-def send_email():
-    print("Email sent")
+
 
 def store(extracted):
     with open("data.txt",'a') as file:
@@ -26,13 +26,16 @@ def read():
     with open("data.txt",'r') as file:
         return file.read()
 if  __name__ == "__main__":
-    scraped = scrape(URL)
-    extracted = extract(scraped)
-    content = read()
-    if extracted != "No upcoming tours":
-        if extracted not in content:
-            store(extracted)
-            send_email()
+    while True:
+        scraped = scrape(URL)
+        extracted = extract(scraped)
+        content = read()
+        if extracted != "No upcoming tours":
+            if extracted not in content:
+                store(extracted)
+                print(extracted)
+                send_email(extracted)
+        time.sleep(2)
 
 
 
