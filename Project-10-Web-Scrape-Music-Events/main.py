@@ -22,6 +22,8 @@ if  __name__ == "__main__":
     scraped = scrape(URL)
     extracted = extract(scraped)
     if extracted != "No upcoming tours":
-        send_email()
+        if extracted not in "data.txt":
+            send_email()
+
 
 
