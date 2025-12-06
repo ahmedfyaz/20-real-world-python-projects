@@ -45,7 +45,7 @@ class DataBase:
         band,city,date = row
         cursor = self.connection.cursor()
         cursor.execute("SELECT* FROM events WHERE band = ? AND city = ? AND date = ?",(band,city,date))
-        row = cursor.fetchall()
+        row =  cursor.fetchall()
         return row
 
 
