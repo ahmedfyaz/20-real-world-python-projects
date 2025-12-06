@@ -14,15 +14,18 @@ HEADERS = {
     'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}
 URL  = "https://programmer100.pythonanywhere.com/tours/"
 
-def scrape(url):
-    """SCRAPE THE PAGE SOURCE FROM URL"""
-    response = requests.get(url,headers=HEADERS)
-    source = response.text
-    return  source
-def extract(source):
-    extractor = selectorlib.Extractor.from_yaml_file("extract.yaml")
-    value = extractor.extract(source)["tours"]
-    return value
+class Event:
+
+    def scrape(self,url):
+        """SCRAPE THE PAGE SOURCE FROM URL"""
+        response = requests.get(url,headers=HEADERS)
+        source = response.text
+        return  source
+
+    def extract(self,source):
+        extractor = selectorlib.Extractor.from_yaml_file("extract.yaml")
+        value = extractor.extract(source)["tours"]
+        return value
 
 
 
@@ -45,8 +48,9 @@ def read(extracted):
 
 if __name__ == "__main__":
     while True:
-        scraped = scrape(URL)
-        extracted = extract(scraped)
+        event = Event()
+        scraped = event.scrape(URL)
+        extracted = event.extract(scraped)
         print(extracted)  # Optional: helps you see what is being scraped
 
         # FIX: Check if extracted data is valid BEFORE calling read()
