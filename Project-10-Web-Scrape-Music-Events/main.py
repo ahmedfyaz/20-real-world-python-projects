@@ -29,6 +29,9 @@ def extract(source):
 def store(extracted):
     row = extracted.split(",")
     row = [item.strip() for item in row]
+    cursor = connection.cursor()
+    cursor.execute("INSERT INTO events VALUES(?,?,?)",row)
+    connection.commit()
 
 def read(extracted):
     row = extracted.split(",")
@@ -39,16 +42,20 @@ def read(extracted):
     row = cursor.fetchall()
     return row
 
-if  __name__ == "__main__":
+
+if __name__ == "__main__":
     while True:
         scraped = scrape(URL)
         extracted = extract(scraped)
-        read(extracted)
+        print(extracted)  # Optional: helps you see what is being scraped
+
+        # FIX: Check if extracted data is valid BEFORE calling read()
         if extracted != "No upcoming tours":
             row = read(extracted)
             if not row:
                 store(extracted)
                 send_email(extracted)
+
         time.sleep(2)
 
 
