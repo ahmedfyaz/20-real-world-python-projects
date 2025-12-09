@@ -41,6 +41,12 @@ class CreditCard:
         self.number = number
         pass
     def validate(self,expiration,cvc_num,holder_name):
+        card_detail ={"number":self.number,"expiration":expiration,
+                    "holder":holder_name,"cvc":cvc_num}
+        if card_detail in card_df:
+            return True
+        else:
+            return False
 
 print(df)
 hotel_ID = input("Enter the id of the hotel")
