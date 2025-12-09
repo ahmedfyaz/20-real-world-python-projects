@@ -5,7 +5,7 @@ card_df =pd.read_csv("cards.csv",dtype=str).to_dict(orient="records")
 class Hotel:
     def __init__(self,hotel_id):
         self.hotel_id = hotel_id
-        self.name = df.loc[df["id"] == self.hotel_id,"name"]
+        self.name = df.loc[df["id"] == self.hotel_id,"name"].squeeze()
         pass
 
     def book(self):
@@ -26,14 +26,14 @@ class Hotel:
 class ReservationTicket:
     def __init__(self,customer_name,hotel_object):
         self.customer_name = customer_name
-        self.hotel = hotel_object
+        self.hotel_i = hotel_object
         pass
     def generate(self):
         content = f"""
             Thank You for your reservation
             here are your booking data:
             Name:{self.customer_name}
-            Hotel name:{self.hotel}"""
+            Hotel name:{self.hotel_i}"""
         return content
 
 class CreditCard:
@@ -68,7 +68,7 @@ if hotel.available():
     if credit_card.validate(expiration_date,cvc,holder):
         hotel.book()
         name = input("Enter your name")
-        reservation_ticket = ReservationTicket(customer_name=name,hotel_object=hotel)
+        reservation_ticket = ReservationTicket(name,hotel)
         print(reservation_ticket.generate())
     else:
         print("There was a problem with your payment")
