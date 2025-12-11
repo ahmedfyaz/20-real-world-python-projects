@@ -64,6 +64,22 @@ class InsertDialog(QDialog):
         layout.addWidget(course_name)
         self.setLayout(layout)
 
+        # Add Mobile widget
+
+        mobile = QLineEdit()
+        mobile.setPlaceholderText("Mobile")
+        layout.addWidget(mobile)
+
+        # add submit button
+        button = QPushButton("Submit")
+        button.clicked.connect(self.add_student)
+    def add_student(self):
+        name = self.findChild(QLineEdit, "student_name").text()
+        course = self.findChild(QComboBox, "course_name").currentText()
+        mobile = self.findChild(QLineEdit, "mobile").text()
+
+
+
 
 
 app = QApplication(sys.argv)
