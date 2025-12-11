@@ -24,7 +24,7 @@ class MainWindow(QMainWindow):
         self.table.setHorizontalHeaderLabels(("Id","Name","Course","Mobile"))
 
     def load_data(self):
-        self.table
+        pass
 
 app = QApplication(sys.argv)
 main_window = MainWindow()
