@@ -77,6 +77,7 @@ class InsertDialog(QDialog):
         button.clicked.connect(self.add_student)
         layout.addWidget(button)
 
+
         self.setLayout(layout)
 
     def add_student(self):
